@@ -1,0 +1,19 @@
+# Automatically detect text files and convert line endings
+* text=auto
+
+# These files need specific line endings
+.env text eol=lf
+.env.* text eol=lf
+*.sh text eol=lf
+
+# SVG files tend to contain long path strings that don't look good in logs
+*.svg -diff
+
+# Mark generated files as binary so they're not converted and not included in
+# grep, diff, log -p, etc.
+*.lock binary
+*.map binary
+*.min.js binary
+*.min.css binary
+
+/public/build/** binary
