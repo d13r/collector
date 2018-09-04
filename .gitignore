@@ -1,3 +1,4 @@
+/config.php
 /terraform/.terraform/
 
 !.gitkeep

@@ -1,1 +1,7 @@
+RewriteEngine on
+
+# Cache-busting URLs
+RewriteRule ^([a-z0-9.-]+)$ - [L]
+RewriteRule ^[a-f0-9]+/([a-z0-9.-]+)$ $1 [L]
+
 Header set Cache-Control "max-age=31536000, public"
