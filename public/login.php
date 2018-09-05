@@ -10,5 +10,5 @@ if ($username === $config['username'] && password_verify($password, $config['pas
     $value = 'invalid';
 }
 
-setcookie('auth', $value, 2147483647, '/', '', true, true);
+send_forever_cookie('auth', $value);
 header('Location: /', true, 303);

@@ -2,17 +2,50 @@ const confirmation = document.querySelector('.confirmation');
 const form = document.querySelector('.form');
 const message = document.querySelector('.message');
 const submit = document.querySelector('.submit');
+const targets = document.querySelector('.targets');
 
 // Keyboard shortcuts
 message.addEventListener('keydown', function (event) {
 
-    if (event.ctrlKey && (event.keyCode === 13 || event.keyCode === 10)) {
+    // console.log(event);
+
+    if (event.ctrlKey && event.key === 'Enter') {
         // Ctrl+Enter
         event.preventDefault();
         send();
+    } else if (event.altKey && event.key === 'ArrowLeft') {
+        // Alt+Left
+        event.preventDefault();
+        rotateTarget(-1);
+    } else if (event.altKey && event.key === 'ArrowRight') {
+        // Alt+Right
+        event.preventDefault();
+        rotateTarget(+1);
     }
 
 });
+
+// Targets
+targets.addEventListener('click', function (event) {
+    if (event.target.matches('.target input')) {
+        message.focus();
+    }
+});
+
+function rotateTarget(offset) {
+    let inputs = targets.querySelectorAll('.target input');
+
+    let selectedIndex = 0;
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].checked) {
+            selectedIndex = i;
+            break;
+        }
+    }
+
+    let newIndex = (selectedIndex + offset + inputs.length) % inputs.length;
+    inputs[newIndex].checked = true;
+}
 
 // Send message
 function send() {
@@ -53,4 +86,3 @@ form.addEventListener('submit', function (event) {
     event.preventDefault();
     send();
 });
-

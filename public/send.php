@@ -19,6 +19,17 @@ if (!logged_in()) {
     send_error('You are not logged in. Please refresh the page and try again');
 }
 
+// Check target
+$targetId = $_POST['target'] ?? '';
+
+if (!isset($config['targets'][$targetId])) {
+    send_error('No target selected');
+}
+
+$target = $config['targets'][$targetId];
+
+send_forever_cookie('target', $targetId);
+
 // Parse message
 $message = trim($_POST['message'] ?? '');
 
@@ -38,5 +49,5 @@ if (count($parts) === 1) {
 }
 
 // Send email
-mail($config['to'], $subject, $message, "From: {$config['from']}");
+mail($target['to'], $subject, $message, "From: {$target['from']}");
 send_json(['success' => 'Message Sent']);

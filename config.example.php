@@ -8,10 +8,23 @@ return [
     // Password hash (run scripts/generate-password-hash.php)
     'password-hash' => '',
 
-    // Email From address
-    'from' => '"Your name" <your@email.com>',
+    // Targets
+    'targets' => [
 
-    // Email To address
-    'to' => '"Your name" <your@email.com>',
+        'home' => [
+            'title' => 'Home',
+            'shortcut' => 'h',
+            'from' => '"Your name" <your@email.com>',
+            'to' => '"Your name" <your@email.com>',
+        ],
+
+        'work' => [
+            'title' => 'Work',
+            'shortcut' => 'w',
+            'from' => '"Your name" <your@email.com>',
+            'to' => '"Your name" <your@work.com>',
+        ],
+
+    ],
 
 ];

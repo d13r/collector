@@ -62,7 +62,7 @@ body, button, input, textarea {
 }
 
 .message::first-line {
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .buttons-row {
@@ -73,6 +73,19 @@ body, button, input, textarea {
 .button {
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.targets {
+    float: right;
+    padding: 3px 5px;
+}
+
+.target {
+    margin-right: 5px;
+}
+
+.target input {
+    margin-right: -1px;
 }
 
 /*===== Confirmation =====*/

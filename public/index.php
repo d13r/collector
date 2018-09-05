@@ -19,13 +19,42 @@
 
             <!-- Main page -->
             <form class="form">
+
+                <!-- Message -->
                 <div class="message-row">
                     <textarea name="message" class="message" autofocus></textarea>
                 </div>
+
                 <div class="buttons-row">
+
+                    <!-- Target -->
+                    <?php if (count($config['targets']) > 1): ?>
+                        <div class="targets">
+                            <?php foreach ($config['targets'] as $id => $target): ?>
+                                <label class="target">
+                                    <input
+                                        type="radio"
+                                        name="target"
+                                        value="<?= e($id) ?>"
+                                        accesskey="<?= e($target['shortcut']) ?>"
+                                        <?= checked(is_current_target($id)) ?>
+                                    >
+                                    <?= e($target['title']) ?>
+                                </label>
+                            <?php endforeach ?>
+                        </div>
+                    <?php else: ?>
+                        <input type="hidden" name="target" value="<?= e(current_target()) ?>">
+                    <?php endif ?>
+
+                    <!-- Send -->
                     <button class="submit button">Send</button>
+
                 </div>
+
+                <!-- Confirmation -->
                 <div class="confirmation">Message Sent</div>
+
             </form>
             <script src="<?= asset_url('main.js') ?>"></script>
 
