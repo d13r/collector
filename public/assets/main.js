@@ -9,18 +9,24 @@ message.addEventListener('keydown', function (event) {
 
     // console.log(event);
 
-    if (event.ctrlKey && event.key === 'Enter') {
-        // Ctrl+Enter
+    if (event.ctrlKey && event.code === 'Enter') {
+        // Ctrl+Enter = Send
         event.preventDefault();
         send();
-    } else if (event.altKey && event.key === 'ArrowLeft') {
-        // Alt+Left
+    } else if (event.altKey && event.code === 'ArrowLeft') {
+        // Alt+Left = Previous target
         event.preventDefault();
         rotateTarget(-1);
-    } else if (event.altKey && event.key === 'ArrowRight') {
-        // Alt+Right
+    } else if (event.altKey && event.code === 'ArrowRight') {
+        // Alt+Right = Next target
         event.preventDefault();
         rotateTarget(+1);
+    } else if (event.ctrlKey && event.shiftKey && event.code === 'KeyZ') {
+        // Ctrl+Shift+Z = Retrieve previous message
+        event.preventDefault();
+        if (!message.value) {
+            message.value = localStorage.getItem('last-message');
+        }
     }
 
 });
@@ -50,6 +56,8 @@ function rotateTarget(offset) {
 // Send message
 function send() {
 
+    let text = message.value;
+
     submit.disabled = true;
     submit.innerText = 'Sending...';
 
@@ -63,6 +71,7 @@ function send() {
             if (json.error) {
                 alert(json.error);
             } else if (json.success) {
+                localStorage.setItem('last-message', text);
                 confirmation.innerText = json.success;
                 confirmation.classList.remove('show');
                 setTimeout(() => confirmation.classList.add('show'), 0);
@@ -87,9 +96,10 @@ form.addEventListener('submit', function (event) {
     send();
 });
 
-// Warn before leaving if a message has been entered but not sent
-window.onbeforeunload = function(event) {
+// Warn before leaving and save the unsent message in local storage
+window.onbeforeunload = function (event) {
     if (message.value) {
+        localStorage.setItem('last-message', message.value);
         event.preventDefault();
         return '';
     }
