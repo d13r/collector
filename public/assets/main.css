@@ -1,7 +1,6 @@
 /*===== Common =====*/
 body {
     background: #e9e9e9;
-    overflow: hidden;
     margin: 0;
 }
 
@@ -47,14 +46,14 @@ body, button, input, textarea {
 
 .message-row {
     border-bottom: 1px solid #dadada;
-    flex: 1;
+    display: flex;
+    flex: 1 0 auto;
 }
 
 .message {
     background: #fff;
     border: none;
     box-sizing: border-box;
-    height: 100%;
     outline: none;
     padding: 8px 11px;
     resize: none;
