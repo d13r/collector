@@ -2,11 +2,22 @@ const form = document.querySelector('.form');
 const message = document.querySelector('.message');
 const submit = document.querySelector('.submit');
 
-form.addEventListener('submit', function (event) {
+// Keyboard shortcuts
+message.addEventListener('keydown', function (event) {
 
-    event.preventDefault();
+    if (event.ctrlKey && (event.keyCode === 13 || event.keyCode === 10)) {
+        // Ctrl+Enter
+        event.preventDefault();
+        send();
+    }
+
+});
+
+// Send message
+function send() {
 
     submit.disabled = true;
+    submit.innerText = 'Sending...';
 
     fetch('/send.php', {
         body: new FormData(form),
@@ -23,13 +34,19 @@ form.addEventListener('submit', function (event) {
             } else {
                 alert('Received an invalid response from the server');
             }
-
-            submit.disabled = false;
-            message.focus();
         })
         .catch(() => {
             alert('Failed to contact the server');
+        })
+        .finally(() => {
+            message.focus();
             submit.disabled = false;
+            submit.innerText = 'Send';
         });
 
+}
+
+form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    send();
 });
