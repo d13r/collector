@@ -39,4 +39,4 @@ if (count($parts) === 1) {
 
 // Send email
 mail($config['to'], $subject, $message, "From: {$config['from']}");
-send_json(['success' => 'Message sent']);
+send_json(['success' => 'Message Sent']);

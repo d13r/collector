@@ -25,6 +25,7 @@
                 <div class="buttons-row">
                     <button class="submit button">Send</button>
                 </div>
+                <div class="confirmation">Message Sent</div>
             </form>
             <script src="<?= asset_url('main.js') ?>"></script>
 

@@ -1,3 +1,4 @@
+const confirmation = document.querySelector('.confirmation');
 const form = document.querySelector('.form');
 const message = document.querySelector('.message');
 const submit = document.querySelector('.submit');
@@ -29,7 +30,9 @@ function send() {
             if (json.error) {
                 alert(json.error);
             } else if (json.success) {
-                alert(json.success);
+                confirmation.innerText = json.success;
+                confirmation.classList.remove('show');
+                setTimeout(() => confirmation.classList.add('show'), 0);
                 message.value = '';
             } else {
                 alert('Received an invalid response from the server');
@@ -50,3 +53,4 @@ form.addEventListener('submit', function (event) {
     event.preventDefault();
     send();
 });
+

@@ -42,6 +42,7 @@ body, button, input, textarea {
     height: 100vh;
     margin: 0 auto;
     max-width: 55em;
+    position: relative;
 }
 
 .message-row {
@@ -72,4 +73,27 @@ body, button, input, textarea {
 .button {
     padding-left: 10px;
     padding-right: 10px;
+}
+
+/*===== Confirmation =====*/
+.confirmation {
+    background: #558B2F;
+    border-radius: 5px;
+    color: #fff;
+    display: none;
+    font-weight: 600;
+    opacity: 0;
+    padding: 5px 10px;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+}
+
+.confirmation.show {
+    animation: fadeInOut 2s linear forwards;
+    display: block;
+}
+
+@keyframes fadeInOut {
+    10%, 90% { opacity: 1 }
 }
