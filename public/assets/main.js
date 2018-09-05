@@ -86,3 +86,11 @@ form.addEventListener('submit', function (event) {
     event.preventDefault();
     send();
 });
+
+// Warn before leaving if a message has been entered but not sent
+window.onbeforeunload = function(event) {
+    if (message.value) {
+        event.preventDefault();
+        return '';
+    }
+};
