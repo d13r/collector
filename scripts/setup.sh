@@ -45,9 +45,8 @@ create_file() {
     fi
 }
 
-#header "Creating files"
-#create_file .env
-#create_file www/.htaccess
+header "Creating files"
+create_file config.php config.example.php
 
 # Composer
 if [ -f composer.json ]; then
