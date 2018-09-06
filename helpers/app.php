@@ -4,7 +4,7 @@ function current_target(): string
 {
     global $config;
 
-    $current = $_COOKIE['target'] ?? null;
+    $current = $_GET['target'] ?? $_COOKIE['target'] ?? null;
 
     if (!isset($config['targets'][$current])) {
         reset($config['targets']);
