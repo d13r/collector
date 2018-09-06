@@ -56,7 +56,7 @@ function rotateTarget(offset) {
 
 // Page title - first line of the message
 function updateTitle() {
-    document.title = message.value.trim().replace(/[\r\n].*$/, '').trim() || 'Collector';
+    document.title = message.value.trim().replace(/[\r\n].*$/s, '').trim() || 'Collector';
 }
 
 message.addEventListener('input', updateTitle);
