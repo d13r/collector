@@ -26,6 +26,7 @@ message.addEventListener('keydown', function (event) {
         event.preventDefault();
         if (!message.value) {
             message.value = localStorage.getItem('last-message');
+            updateTitle();
         }
     }
 
@@ -53,6 +54,13 @@ function rotateTarget(offset) {
     inputs[newIndex].checked = true;
 }
 
+// Page title - first line of the message
+function updateTitle() {
+    document.title = message.value.trim().replace(/[\r\n].*$/, '').trim() || 'Collector';
+}
+
+message.addEventListener('input', updateTitle);
+
 // Send message
 function send() {
 
@@ -76,6 +84,7 @@ function send() {
                 confirmation.classList.remove('show');
                 setTimeout(() => confirmation.classList.add('show'), 0);
                 message.value = '';
+                updateTitle();
             } else {
                 alert('Received an invalid response from the server');
             }
