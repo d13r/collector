@@ -56,13 +56,21 @@ body, button, input, textarea {
     border: none;
     box-sizing: border-box;
     outline: none;
-    padding: 8px 11px;
+    padding: 8px 11px 50vh 11px;
     resize: none;
     width: 100%;
 }
 
 .message::first-line {
     font-weight: 700;
+}
+
+.message::-webkit-scrollbar {
+    width: 2px;
+}
+
+.message::-webkit-scrollbar-thumb {
+    background-color: #bbb;
 }
 
 .buttons-row {
