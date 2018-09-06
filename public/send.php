@@ -42,10 +42,11 @@ $message = str_replace(["\r\n", "\r"], "\n", $message);
 $parts = explode("\n", $message, 2);
 
 if (count($parts) === 1) {
-    $subject = $parts[0];
+    $subject = $message;
     $message = '';
 } else {
-    [$subject, $message] = $parts;
+    $subject = trim($parts[0]);
+    $message = trim($parts[1]);
 }
 
 // Send email
