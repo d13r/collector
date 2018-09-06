@@ -39,7 +39,7 @@
                                         accesskey="<?= e($target['shortcut']) ?>"
                                         <?= checked(is_current_target($id)) ?>
                                     >
-                                    <?= e($target['title']) ?>
+                                    <span class="target-text"><?= e($target['title']) ?></span>
                                 </label>
                             <?php endforeach ?>
                         </div>

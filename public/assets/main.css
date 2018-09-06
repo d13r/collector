@@ -79,6 +79,7 @@ body, button, input, textarea {
 }
 
 .button {
+    font-weight: 500;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -94,6 +95,17 @@ body, button, input, textarea {
 
 .target input {
     margin-right: -1px;
+    position: relative;
+    top: 1px;
+}
+
+.target-text {
+    color: #ccc;
+    font-weight: 500;
+}
+
+input:checked ~ .target-text {
+    color: #000;
 }
 
 /*===== Confirmation =====*/
