@@ -22,7 +22,7 @@
 
                 <!-- Message -->
                 <div class="message-row">
-                    <textarea name="message" class="message" placeholder="Write something here..." autofocus></textarea>
+                    <textarea name="message" class="message" autofocus></textarea>
                 </div>
 
                 <div class="buttons-row">
