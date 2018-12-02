@@ -49,6 +49,13 @@ if (count($parts) === 1) {
     $message = trim($parts[1]);
 }
 
+// Build headers
+$headers = "From: {$target['from']}";
+
+if ($target['replyto'] && $target['replyto'] !== $target['from']) {
+    $headers .= "\r\nReply-To: {$target['replyto']}";
+}
+
 // Send email
-mail($target['to'], $subject, $message, "From: {$target['from']}");
+mail($target['to'], $subject, $message, $headers, '-f ' . escapeshellarg($target['return']));
 send_json(['success' => 'Message Sent']);
