@@ -29,6 +29,15 @@ return [
             'to' => '"Your name" <your@work.com>',
         ],
 
+        'both' => [
+            'title' => 'Both',
+            'shortcut' => 'b',
+            'return' => 'your@email.com',
+            'from' => '"Your name" <your@email.com>',
+            'replyto' => '"Your name" <your@email.com>',
+            'to' => '"Your name" <your@email.com>, "Your name" <your@work.com>',
+        ],
+
     ],
 
 ];
