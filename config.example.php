@@ -34,7 +34,7 @@ return [
             'shortcut' => 'b',
             'return' => 'your@email.com',
             'from' => '"Your name" <your@email.com>',
-            'replyto' => '"Your name" <your@email.com>',
+            'replyto' => '"Your name" <your@email.com>, "Your name" <your@work.com>',
             'to' => '"Your name" <your@email.com>, "Your name" <your@work.com>',
         ],
 
