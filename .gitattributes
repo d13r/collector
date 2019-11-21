@@ -16,4 +16,4 @@
 *.min.js binary
 *.min.css binary
 
-/public/build/** binary
+/www/build/** binary
