@@ -10,7 +10,8 @@
         <title>Collector</title>
 
         <link rel="stylesheet" href="<?= asset_url('main.css') ?>">
-        <link rel="shortcut icon" href="<?= asset_url('favicon.ico') ?>">
+        <link rel="icon" href="<?= asset_url('favicon.ico') ?>">
+        <link rel="manifest" href="<?= asset_url('manifest.json') ?>">
 
     </head>
     <body>
