@@ -56,7 +56,8 @@ function rotateTarget(offset) {
 
 // Page title - first line of the message
 function updateTitle() {
-    document.title = message.value.trim().replace(/[\r\n].*$/s, '').trim() || 'Collector';
+    // Note: [^] is equivalent to "." with the "s" (dotall) flag, but works in Firefox
+    document.title = message.value.trim().replace(/[\r\n][^]*$/, '').trim() || 'Collector';
 }
 
 message.addEventListener('input', updateTitle);
