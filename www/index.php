@@ -4,7 +4,7 @@
     <head>
 
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
         <title>Collector</title>
@@ -23,7 +23,7 @@
 
                 <!-- Message -->
                 <div class="message-row">
-                    <textarea name="message" class="message" autofocus><?= e($_GET['m'] ?? '') ?></textarea>
+                    <textarea name="message" class="message" placeholder="Collector" autofocus><?= e($_GET['m'] ?? '') ?></textarea>
                 </div>
 
                 <div class="buttons-row">
