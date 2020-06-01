@@ -68,7 +68,7 @@ function rotateTarget(offset) {
 // Page title - first line of the message
 function updateTitle() {
     // Note: [^] is equivalent to "." with the "s" (dotall) flag, but works in Firefox
-    document.title = message.value.trim().replace(/[\r\n][^]*$/, '').trim() || 'Collector';
+    document.title = message.value.trim().replace(/[\r\n][^]*$/, '').trim() || 'Whiteboard';
 }
 
 message.addEventListener('input', updateTitle);
@@ -89,7 +89,7 @@ function positionToLineAndCol(lines, position) {
 
         if (passed + lineLen >= position) {
             return [lineNum, position - passed];
-        }   
+        }
 
         passed += lineLen + 1;
     }
