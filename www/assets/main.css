@@ -39,9 +39,10 @@ body, button, input, textarea {
     box-shadow: 0 0 4px #ccc;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    margin: 0 auto;
-    max-width: 55em;
+    height: calc(100vh - 42px);
+    margin: 20px 22px 22px 20px;
+    /*margin: 0 auto;
+    max-width: 55em;*/
     position: relative;
 }
 
