@@ -11,4 +11,4 @@ if ($username === $config['username'] && password_verify($password, $config['pas
 }
 
 send_forever_cookie('auth', $value);
-header('Location: /', true, 303);
+header('Location: /frame.php', true, 303);

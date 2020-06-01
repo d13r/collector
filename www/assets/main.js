@@ -37,6 +37,8 @@ targets.addEventListener('click', function (event) {
     if (event.target.matches('.target input')) {
         message.focus();
     }
+
+    updatePlaceholder();
 });
 
 function rotateTarget(offset) {
@@ -52,6 +54,7 @@ function rotateTarget(offset) {
 
     let newIndex = (selectedIndex + offset + inputs.length) % inputs.length;
     inputs[newIndex].checked = true;
+    updatePlaceholder();
 }
 
 // Page title - first line of the message
@@ -61,6 +64,13 @@ function updateTitle() {
 }
 
 message.addEventListener('input', updateTitle);
+
+// Placeholder - destination
+function updatePlaceholder() {
+    message.placeholder = 'Send to ' + document.querySelector('.target input:checked + .target-text').innerText + '...';
+}
+
+updatePlaceholder();
 
 // Send message
 function send() {
@@ -108,7 +118,7 @@ form.addEventListener('submit', function (event) {
 
 // Warn before leaving and save the unsent message in local storage
 window.onbeforeunload = function (event) {
-    if (message.value) {
+    if (message.value && message.value !== message.defaultValue) {
         localStorage.setItem('last-message', message.value);
         event.preventDefault();
         return '';

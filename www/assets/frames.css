@@ -1,0 +1,21 @@
+body {
+    background: #e9e9e9;
+    margin: 0;
+}
+
+iframe {
+    border: 0;
+    flex: 2;
+}
+
+.container {
+    display: flex;
+    height: calc(100vh - 15px);
+    margin: 7px 8px 8px 7px;
+}
+
+.right {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
