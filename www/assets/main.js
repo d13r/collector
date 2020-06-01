@@ -21,6 +21,14 @@ message.addEventListener('keydown', function (event) {
         // Alt+Right = Next target
         event.preventDefault();
         rotateTarget(+1);
+    } else if (event.altKey && event.code === 'ArrowUp') {
+        // Alt+Up = Move line up
+        event.preventDefault();
+        moveLine(-1);
+    } else if (event.altKey && event.code === 'ArrowDown') {
+        // Alt+Down = Move line down
+        event.preventDefault();
+        moveLine(+1);
     } else if (event.ctrlKey && event.shiftKey && event.code === 'KeyZ') {
         // Ctrl+Shift+Z = Retrieve previous message
         event.preventDefault();
@@ -38,11 +46,11 @@ targets.addEventListener('click', function (event) {
         message.focus();
     }
 
-    updatePlaceholder();
+    // updatePlaceholder();
 });
 
 function rotateTarget(offset) {
-    let inputs = targets.querySelectorAll('.target input');
+    const inputs = targets.querySelectorAll('.target input');
 
     let selectedIndex = 0;
     for (let i = 0; i < inputs.length; i++) {
@@ -52,9 +60,9 @@ function rotateTarget(offset) {
         }
     }
 
-    let newIndex = (selectedIndex + offset + inputs.length) % inputs.length;
+    const newIndex = (selectedIndex + offset + inputs.length) % inputs.length;
     inputs[newIndex].checked = true;
-    updatePlaceholder();
+    // updatePlaceholder();
 }
 
 // Page title - first line of the message
@@ -66,16 +74,67 @@ function updateTitle() {
 message.addEventListener('input', updateTitle);
 
 // Placeholder - destination
-function updatePlaceholder() {
-    message.placeholder = 'Send to ' + document.querySelector('.target input:checked + .target-text').innerText + '...';
+// function updatePlaceholder() {
+//     message.placeholder = 'Send to ' + document.querySelector('.target input:checked + .target-text').innerText + '...';
+// }
+
+// updatePlaceholder();
+
+// Move lines
+function positionToLineAndCol(lines, position) {
+    let passed = 0;
+
+    for (let lineNum = 0; lineNum < lines.length; lineNum++) {
+        const lineLen = lines[lineNum].length;
+
+        if (passed + lineLen >= position) {
+            return [lineNum, position - passed];
+        }   
+
+        passed += lineLen + 1;
+    }
+
+    return [lines.length, lines[lines.length - 1].length];
 }
 
-updatePlaceholder();
+function lineAndColToPosition(lines, line, col)
+{
+    let passed = 0;
+
+    for (let lineNum = 0; lineNum < line; lineNum++) {
+        passed += lines[lineNum].length + 1;
+    }
+
+    return passed + col;
+}
+
+function moveLine(offset) {
+    const lines = message.value.split('\n');
+
+    let [startLine, startCol] = positionToLineAndCol(lines, message.selectionStart);
+    let [endLine, endCol] = positionToLineAndCol(lines, message.selectionEnd);
+
+    if (endCol === 0 && endLine > startLine) {
+        [endLine, endCol] = positionToLineAndCol(lines, message.selectionEnd - 1)
+    }
+
+    if (startLine + offset < 0 || endLine + offset > lines.length - 1) {
+        return;
+    }
+
+    const movedLines = lines.splice(startLine, endLine - startLine + 1);
+    lines.splice(startLine + offset, 0, ...movedLines);
+
+    message.value = lines.join('\n');
+
+    message.selectionStart = lineAndColToPosition(lines, startLine + offset, startCol);
+    message.selectionEnd = lineAndColToPosition(lines, endLine + offset, endCol);
+}
 
 // Send message
 function send() {
 
-    let text = message.value;
+    const text = message.value;
 
     submit.disabled = true;
     submit.innerText = 'Sending...';
