@@ -19,7 +19,7 @@
             <iframe src="/frame.php?target=<?= urlencode($_GET['target'] ?? '') ?>&amp;m=<?= urlencode($_GET['m'] ?? '') ?>" onload="this.contentDocument.querySelector('[autofocus]').focus()"></iframe>
             <div class="right">
                 <iframe src="/frame.php?target=<?= urlencode($_GET['target'] ?? '') ?>&amp;m=<?= urlencode("Today\n") ?>"></iframe>
-                <iframe src="/frame.php?target=<?= urlencode($_GET['target'] ?? '') ?>&amp;m=<?= urlencode("Interruptions\n") ?>"></iframe>
+                <iframe src="/frame.php?target=<?= urlencode($_GET['target'] ?? '') ?>&amp;m=<?= urlencode("Later\n") ?>"></iframe>
                 <iframe src="/frame.php?target=<?= urlencode($_GET['target'] ?? '') ?>&amp;m=<?= urlencode("") ?>"></iframe>
             </div>
         </div>
