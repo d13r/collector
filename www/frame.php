@@ -23,7 +23,7 @@
 
                 <!-- Message -->
                 <div class="message-row">
-                    <textarea name="message" class="message" autofocus><?= e($_GET['m'] ?? '') ?></textarea>
+                    <textarea name="message" class="message" autofocus spellcheck="false"><?= e($_GET['m'] ?? '') ?></textarea>
                 </div>
 
                 <div class="buttons-row">
