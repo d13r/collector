@@ -16,10 +16,13 @@
     </head>
     <body>
         <div class="container">
-            <iframe src="/frame.php?target=<?= urlencode($_GET['target'] ?? '') ?>&amp;m=<?= urlencode($_GET['m'] ?? '') ?>" onload="this.contentDocument.querySelector('[autofocus]').focus()"></iframe>
-            <div class="right">
-                <iframe src="/frame.php?target=<?= urlencode($_GET['target'] ?? '') ?>&amp;m=<?= urlencode("Today\n") ?>"></iframe>
-                <iframe src="/frame.php?target=<?= urlencode($_GET['target'] ?? '') ?>&amp;m=<?= urlencode("Later\n") ?>"></iframe>
+            <div class="column" style="flex: 2;">
+                <iframe src="/frame.php?target=<?= urlencode($_GET['target'] ?? '') ?>&amp;m=<?= urlencode($_GET['m'] ?? '') ?>"
+                    onload="this.contentDocument.querySelector('[autofocus]').focus()"></iframe>
+            </div>
+            <div class="column">
+                <iframe src="/frame.php?target=<?= urlencode($_GET['target'] ?? '') ?>&amp;m=<?= urlencode("") ?>"></iframe>
+                <iframe src="/frame.php?target=<?= urlencode($_GET['target'] ?? '') ?>&amp;m=<?= urlencode("") ?>"></iframe>
                 <iframe src="/frame.php?target=<?= urlencode($_GET['target'] ?? '') ?>&amp;m=<?= urlencode("") ?>"></iframe>
             </div>
         </div>
