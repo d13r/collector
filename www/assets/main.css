@@ -19,7 +19,7 @@ body, button, input {
 
 textarea {
     font-family: 'Handlee';
-    font-size: 21px;
+    font-size: 30px;
     font-weight: bold;
     line-height: 1.7;
     letter-spacing: 1px;
@@ -54,8 +54,7 @@ textarea {
     box-shadow: 0 0 4px #ccc;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 15px);
-    margin: 7px 8px 8px 7px;
+    height: 100vh;
     position: relative;
 }
 
