@@ -75,7 +75,19 @@ textarea {
 }
 
 .message::first-line {
-    color: #080;
+    color: #c0c;
+}
+
+.message[data-target="home"]::first-line {
+    color: #00f;
+}
+
+.message[data-target="work"]::first-line {
+    color: #090;
+}
+
+.message[data-target="both"]::first-line {
+    color: #c00;
 }
 
 .message::placeholder {

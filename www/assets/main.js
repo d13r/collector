@@ -46,7 +46,7 @@ targets.addEventListener('click', function (event) {
         message.focus();
     }
 
-    // updatePlaceholder();
+    updateTarget();
 });
 
 function rotateTarget(offset) {
@@ -62,8 +62,15 @@ function rotateTarget(offset) {
 
     const newIndex = (selectedIndex + offset + inputs.length) % inputs.length;
     inputs[newIndex].checked = true;
-    // updatePlaceholder();
+    updateTarget();
 }
+
+function updateTarget() {
+    //message.placeholder = 'Send to ' + document.querySelector('.target input:checked + .target-text').innerText + '...';
+    message.dataset.target = document.querySelector('.target input:checked').value;
+}
+
+updateTarget();
 
 // Page title - first line of the message
 function updateTitle() {
@@ -72,13 +79,6 @@ function updateTitle() {
 }
 
 message.addEventListener('input', updateTitle);
-
-// Placeholder - destination
-// function updatePlaceholder() {
-//     message.placeholder = 'Send to ' + document.querySelector('.target input:checked + .target-text').innerText + '...';
-// }
-
-// updatePlaceholder();
 
 // Move lines
 function positionToLineAndCol(lines, position) {
