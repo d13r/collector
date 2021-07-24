@@ -73,15 +73,17 @@ textarea {
 }
 
 .message[data-target="work"]::first-line {
-    color: #090;
+    color: #080;
 }
 
 .message[data-target="both"]::first-line {
     color: #c00;
 }
 
+.message.placeholder::first-line,
 .message::placeholder {
-    color: #ccc;
+    /* ::placeholder is overridden by ::first-line so we have to use .placeholder as a workaround (24 Jul 2021) */
+    color: #ccc !important;
 }
 
 .message::-webkit-scrollbar {

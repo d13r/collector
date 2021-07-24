@@ -34,7 +34,7 @@ message.addEventListener('keydown', function (event) {
         event.preventDefault();
         if (!message.value) {
             message.value = localStorage.getItem('last-message');
-            updateTitle();
+            updatedValue();
         }
     }
 
@@ -73,12 +73,19 @@ function updateTarget() {
 updateTarget();
 
 // Page title - first line of the message
-function updateTitle() {
+function updatedValue() {
     // Note: [^] is equivalent to "." with the "s" (dotall) flag, but works in Firefox
     document.title = message.value.trim().replace(/[\r\n][^]*$/, '').trim() || 'Collector';
+
+    if (message.value) {
+        message.classList.remove('placeholder');
+    } else {
+        message.classList.add('placeholder');
+    }
 }
 
-message.addEventListener('input', updateTitle);
+message.addEventListener('input', updatedValue);
+updatedValue();
 
 // Move lines
 function positionToLineAndCol(lines, position) {
@@ -89,7 +96,7 @@ function positionToLineAndCol(lines, position) {
 
         if (passed + lineLen >= position) {
             return [lineNum, position - passed];
-        }   
+        }
 
         passed += lineLen + 1;
     }
@@ -154,7 +161,7 @@ function send() {
                 confirmation.classList.remove('show');
                 setTimeout(() => confirmation.classList.add('show'), 0);
                 message.value = '';
-                updateTitle();
+                updatedValue();
             } else {
                 alert('Received an invalid response from the server');
             }
