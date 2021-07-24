@@ -1,28 +1,17 @@
 /*===== Common =====*/
-@font-face {
-    font-family: 'Handlee';
-    font-style: normal;
-    font-weight: normal;
-    src: url('handlee-regular-webfont.woff') format('woff');
-}
-
 body {
     background: #e9e9e9;
     margin: 0;
 }
 
-body, button, input {
+body, button, input, textarea {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
     font-size: 16px;
     line-height: 1.5;
 }
 
 textarea {
-    font-family: 'Handlee';
-    font-size: 30px;
-    font-weight: bold;
-    line-height: 1.7;
-    letter-spacing: 1px;
+    font-size: 18px;
 }
 
 /*===== Login =====*/
@@ -76,6 +65,7 @@ textarea {
 
 .message::first-line {
     color: #c0c;
+    font-weight: 700;
 }
 
 .message[data-target="home"]::first-line {
