@@ -1,7 +1,4 @@
 <?php
-
-use Aws\Ses\SesClient;
-
 require dirname(__DIR__) . '/inc/bootstrap.php';
 
 // Helpers
@@ -52,35 +49,13 @@ if (count($parts) === 1) {
     $message = trim($parts[1]);
 }
 
+// Build headers
+$headers = "From: {$target['from']}";
+
+if ($target['replyto'] && $target['replyto'] !== $target['from']) {
+    $headers .= "\r\nReply-To: {$target['replyto']}";
+}
+
 // Send email
-$ses = new SesClient([
-    'version' => '2010-12-01',
-    'region' => $config['aws']['region'],
-    'credentials' => [
-        'key' => $config['aws']['key'],
-        'secret' => $config['aws']['secret'],
-    ],
-]);
-
-$ses->sendEmail([
-    'Source' => $target['from'],
-    'ReturnPath' => $target['return'],
-    'ReplyToAddresses' => $target['replyto'],
-    'Destination' => [
-        'ToAddresses' => $target['to'],
-    ],
-    'Message' => [
-        'Subject' => [
-            'Charset' => 'UTF-8',
-            'Data' => $subject,
-        ],
-        'Body' => [
-            'Text' => [
-                'Charset' => 'UTF-8',
-                'Data' => $message,
-            ],
-        ],
-    ],
-]);
-
+mail($target['to'], $subject, $message, $headers, '-f ' . escapeshellarg($target['return']));
 send_json(['success' => 'Message Sent']);
