@@ -1,4 +1,10 @@
 <?php
+
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
+
 require dirname(__DIR__) . '/inc/bootstrap.php';
 
 // Helpers
@@ -49,13 +55,21 @@ if (count($parts) === 1) {
     $message = trim($parts[1]);
 }
 
-// Build headers
-$headers = "From: {$target['from']}";
+// Send email
+$email = (new Email());
+$email->returnPath(Address::create($target['return']));
+$email->from(Address::create($target['from']));
+$email->to(...Address::createArray( $target['to']));
+$email->subject($subject);
+$email->text($message);
 
-if ($target['replyto'] && $target['replyto'] !== $target['from']) {
-    $headers .= "\r\nReply-To: {$target['replyto']}";
+if ($target['replyto'] ?? null) {
+    $email->replyTo(...Address::createArray($target['replyto']));
 }
 
-// Send email
-mail($target['to'], $subject, $message, $headers, '-f ' . escapeshellarg($target['return']));
+$transport = Transport::fromDsn('sendmail://default');
+$mailer = new Mailer($transport);
+$mailer->send($email);
+
+// Send response
 send_json(['success' => 'Message Sent']);
