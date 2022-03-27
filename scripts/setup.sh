@@ -3,69 +3,98 @@ set -o nounset -o pipefail -o errexit
 cd "$(dirname "$0")/.."
 
 ################################################################################
-# Install dependencies
+# Create files & directories, and install/update dependencies.
 ################################################################################
 
-source scripts/_colors.sh
-
-# Get mode
-mode="${1:-}"
-
-# Check parameters & show usage info
-if [ "$mode" != "prod" ] && [ "$mode" != "dev" ]; then
-    echo "Usage: t setup prod - Install in production mode"
-    echo "       t setup dev  - Install in development mode"
-
-    if [ $# -eq 0 ]; then
-        exit 0
-    else
-        exit 1
-    fi
-fi
+source scripts/_includes/colors.sh
 
 # Header
 header() {
     echo
-    blue bold '================================================================================'
-    blue bold " $1"
-    blue bold '================================================================================'
-    echo
+    blue bold "$1"
 }
 
-# Create files
+# Check if the site has already been configured
+if [[ -f .env ]]; then
+    envExists=true
+else
+    envExists=false
+fi
+
+# Create files & directories
+create_dir() {
+    dir="$1"
+
+    if [[ -d "$dir" ]]; then
+        echo "'$dir/' already exists"
+    else
+        echo "Creating directory '$dir/'"
+        mkdir -p "$dir"
+    fi
+}
+
 create_file() {
     dest="$1"
     src="${2:-$1.example}"
 
-    if [ ! -f "$dest" ]; then
+    if [[ -f "$dest" ]]; then
+        echo "'$dest' already exists"
+    else
         echo "Copying '$src' to '$dest'"
         cp $src $dest
-    else
-        echo "'$dest' already exists"
     fi
 }
 
-header "Creating files"
+create_symlink() {
+    link="$1"
+    target="$2"
+
+    if [[ -L "$link" ]]; then
+        echo "'$link' already exists"
+    else
+        echo "Creating '$link' symlink to '$target'"
+        ln -s "$target" "$link"
+    fi
+}
+
+header "Creating files & directories..."
+create_file .env
 create_file config.php config.example.php
 
-# Composer
-if [ -f composer.json ]; then
-    header 'PHP - Composer (composer.json)'
-
-    if [ "$mode" = "dev" ]; then
-        composer install
-    else
-        composer install --no-dev
-    fi
+# Bail now if .env is not already configured
+if ! $envExists; then
+    echo
+    red bold "Please configure .env then run setup again"
+    exit 1 # Error code in case any other scripts (e.g. deploy) depend on this
 fi
 
-# Yarn
-if [ -f package.json ]; then
-    header 'Node.js - Yarn (package.json)'
+# Check .env is up-to-date
+header "Checking .env file is up-to-date..."
+if [[ ${DEPLOYING:-} = 1 ]]; then
+    # Don't exit if deploying because they may be minor changes that don't affect the rest of the script
+    scripts/check-dotenv.sh || true
+else
+    scripts/check-dotenv.sh
+fi
 
-    if [ "$mode" = "dev" ]; then
-        yarn install
+# Determine the environment / mode
+if [[ -f .env ]]; then
+    source .env
+fi
+
+if [[ ${APP_ENV:-} = "local" ]]; then
+    devMode=true
+else
+    devMode=false
+fi
+
+# Composer
+if [[ -f composer.json ]]; then
+    header 'Installing Composer (PHP) packages...'
+
+    if $devMode; then
+        scripts/composer.sh install --no-interaction --ansi
     else
-        yarn install --prod
+        scripts/composer.sh install --no-interaction --ansi --no-dev --classmap-authoritative
     fi
 fi

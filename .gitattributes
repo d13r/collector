@@ -1,9 +1,12 @@
 # Automatically detect text files and convert line endings
+# Tip: After adding this, use 'rm .git/index && git reset' to refresh the repository
+# https://help.github.com/en/articles/dealing-with-line-endings#refreshing-a-repository-after-changing-line-endings
 * text=auto
 
 # These files need specific line endings
 .env text eol=lf
 .env.* text eol=lf
+*.sln text eol=crlf
 *.sh text eol=lf
 
 # SVG files tend to contain long path strings that don't look good in logs
@@ -16,4 +19,3 @@
 *.min.js binary
 *.min.css binary
 
-/www/build/** binary

@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+
+  php:
+    build: ./docker/php-apache
+    restart: unless-stopped
+    environment:
+      - DEBUG
+    volumes:
+      - .:/app
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.collector-http.entryPoints=http
+      - traefik.http.routers.collector-http.rule=Host(`collector.$DOMAIN`)
+      - traefik.http.routers.collector-http.middlewares=redirect-to-https
+      - traefik.http.routers.collector-https.entryPoints=https
+      - traefik.http.routers.collector-https.rule=Host(`collector.$DOMAIN`)
+      - traefik.http.routers.collector-https.tls=true
+
+networks:
+  default:
+    name: traefik
