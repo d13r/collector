@@ -41,6 +41,6 @@ return [
     ],
 
     // Mailer DSN (https://symfony.com/doc/current/mailer.html#transport-setup)
-    'mailer' =>  'smtp://your%40email.com:XXX@smtp.fastmail.com:587',
+    'mailer' =>  'ses+https://XXX:' . rawurlencode('YYY') . '@default',
 
 ];
