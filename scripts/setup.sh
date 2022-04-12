@@ -98,3 +98,12 @@ if [[ -f composer.json ]]; then
         scripts/composer.sh install --no-interaction --ansi --no-dev --classmap-authoritative
     fi
 fi
+
+# File permissions
+header 'Updating file permissions...'
+
+if $devMode; then
+    scripts/permissions-for-development.sh
+else
+    scripts/permissions-for-live.sh
+fi
