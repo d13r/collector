@@ -3,12 +3,10 @@ set -o nounset -o pipefail -o errexit
 cd "$(dirname "$0")/.."
 
 ################################################################################
-# On the development server:
-# Set the file permissions correctly for our (Ubuntu) development servers
-# (owned by $USER:www, group writable and group sticky).
+# Set file permissions correctly for the development server.
 ################################################################################
 
-if [ "${DEPLOYING:-}" = 1 ]; then
+if [[ ${DEPLOYING:-} = 1 ]]; then
     deploying=true
 else
     deploying=false
@@ -22,10 +20,11 @@ maybe_suppress_errors() {
     fi
 }
 
-# Sanity check
-if [[ -d /var/cpanel ]]; then
-    echo 'The permissions-for-development script is not compatible with cPanel servers' >&2
-    exit 1
+if [[ $PWD = /home/www/*/repo ]]; then
+    # Update the config and log files as well
+    root=..
+else
+    root=.
 fi
 
 # Ownership
@@ -36,18 +35,18 @@ if ! $deploying; then
     else
         group=$USER
     fi
-    sudo chown -R $USER:$group ..
+    sudo chown -R $USER:$group $root
 fi
 
 # Permissions
 echo "Setting permissions..."
-maybe_suppress_errors chmod ug+rwX,o-rwx -R ..
+maybe_suppress_errors chmod ug+rwX,o-rwx -R $root
 
 # Make sure the scripts are all executable
 maybe_suppress_errors chmod +x -R scripts
 
 # Group sticky (new files owned by 'www' group instead of the current user)
 echo "Setting sticky bit on directories..."
-maybe_suppress_errors find .. -type d -exec chmod g+s '{}' +
+maybe_suppress_errors find $root -type d -exec chmod g+s '{}' +
 
 echo "Done."
