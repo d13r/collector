@@ -66,7 +66,7 @@ function rotateTarget(offset) {
 }
 
 function updateTarget() {
-    //message.placeholder = 'Send to ' + document.querySelector('.target input:checked + .target-text').innerText + '...';
+    message.placeholder = 'Mail Me at ' + document.querySelector('.target input:checked + .target-text').innerText + '...';
     message.dataset.target = document.querySelector('.target input:checked').value;
 }
 
