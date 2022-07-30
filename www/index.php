@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <title>Collector</title>
+        <title>Mail Me</title>
 
         <link rel="stylesheet" href="<?= asset_url('main.css') ?>">
         <link rel="icon" href="<?= asset_url('favicon.ico') ?>">
@@ -23,7 +23,7 @@
 
                 <!-- Message -->
                 <div class="message-row">
-                    <textarea name="message" class="message" autofocus placeholder="Collector" spellcheck="false"><?= "\n" . e($_GET['message'] ?? '') ?></textarea>
+                    <textarea name="message" class="message" autofocus placeholder="Mail Me" spellcheck="false"><?= "\n" . e($_GET['message'] ?? '') ?></textarea>
                 </div>
 
                 <div class="buttons-row">
