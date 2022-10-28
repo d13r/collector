@@ -18,6 +18,7 @@ return [
             'from' => '"Your name" <your@email.com>',
             'replyto' => ['"Your name" <your@email.com>'],
             'to' => ['"Your name" <your@email.com>'],
+            'color' => '#00f',
         ],
 
         'work' => [
@@ -27,6 +28,7 @@ return [
             'from' => '"Your name" <your@email.com>',
             'replyto' => ['"Your name" <your@work.com>'],
             'to' => ['"Your name" <your@work.com>'],
+            'color' => '#080',
         ],
 
         'both' => [
@@ -36,6 +38,7 @@ return [
             'from' => '"Your name" <your@email.com>',
             'replyto' => ['"Your name" <your@email.com>', '"Your name" <your@work.com>'],
             'to' => ['"Your name" <your@email.com>', '"Your name" <your@work.com>'],
+            'color' => '#c00',
         ],
 
     ],

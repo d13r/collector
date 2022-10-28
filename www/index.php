@@ -13,6 +13,14 @@
         <link rel="icon" href="<?= asset_url('favicon.ico') ?>">
         <link rel="manifest" href="<?= asset_url('manifest.json') ?>">
 
+        <style>
+            <?php foreach ($config['targets'] as $id => $target): if ($target['color'] ?? null): ?>
+                .message[data-target="<?= e($id) ?>"]::first-line {
+                    color: <?= e($target['color']) ?>;
+                }
+            <?php endif; endforeach ?>
+        </style>
+
     </head>
     <body>
 

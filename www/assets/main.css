@@ -68,18 +68,6 @@ textarea {
     font-weight: 700;
 }
 
-.message[data-target="home"]::first-line {
-    color: #00f;
-}
-
-.message[data-target="work"]::first-line {
-    color: #080;
-}
-
-.message[data-target="both"]::first-line {
-    color: #c00;
-}
-
 .message.placeholder::first-line,
 .message::placeholder {
     /* ::placeholder is overridden by ::first-line so we have to use .placeholder as a workaround (24 Jul 2021) */
