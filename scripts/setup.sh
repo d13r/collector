@@ -60,7 +60,7 @@ create_symlink() {
 header "Creating files & directories..."
 create_file .env
 create_file config.php config.example.php
-#create_file www/.htaccess
+#create_file public/.htaccess
 
 # Bail now if .env is not already configured
 if ! $envExists; then

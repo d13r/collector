@@ -2,7 +2,7 @@
 
 function asset_url($file)
 {
-    $path = base_path("www/assets/$file");
+    $path = base_path("public/assets/$file");
 
     $hash = md5_file($path);
 
