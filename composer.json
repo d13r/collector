@@ -1,11 +1,8 @@
 {
     "name": "d13r/collector",
     "description": "",
-    "repositories": [
-    ],
     "require": {
         "php": "8.1.*",
-        "symfony/amazon-mailer": "^6.0",
         "symfony/mailer": "^6.0"
     },
     "require-dev": {
@@ -13,7 +10,6 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
         },
         "classmap": [
         ],

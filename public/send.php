@@ -67,7 +67,7 @@ if ($target['replyto'] ?? null) {
     $email->replyTo(...Address::createArray($target['replyto']));
 }
 
-$transport = Transport::fromDsn($config['mailer']);
+$transport = Transport::fromDsn('sendmail://default');
 $mailer = new Mailer($transport);
 $mailer->send($email);
 

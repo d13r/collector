@@ -43,7 +43,4 @@ return [
 
     ],
 
-    // Mailer DSN (https://symfony.com/doc/current/mailer.html#transport-setup)
-    'mailer' =>  'ses+https://XXX:' . rawurlencode('YYY') . '@default',
-
 ];
