@@ -75,7 +75,7 @@ updateTarget();
 // Page title - first line of the message
 function updatedValue() {
     // Note: [^] is equivalent to "." with the "s" (dotall) flag, but works in Firefox
-    document.title = message.value.trim().replace(/[\r\n][^]*$/, '').trim() || 'Mail Me';
+    document.title = message.value.trim().replace(/[\r\n][^]*$/, '').trim() || 'Collector';
 
     if (message.value) {
         message.classList.remove('placeholder');
