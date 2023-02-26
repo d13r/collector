@@ -5,7 +5,7 @@ return [
     // Username
     'username' => '',
 
-    // Password hash (run scripts/generate-password-hash.php)
+    // Password hash (run bin/generate-password-hash)
     'password-hash' => '',
 
     // Targets
