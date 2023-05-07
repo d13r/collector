@@ -66,6 +66,8 @@ function rotateTarget(offset) {
 }
 
 function updateTarget() {
+    document.title = 'To: Me @ ' + document.querySelector('.target input:checked + .target-text').innerText;
+
     message.placeholder = 'To: Me @ ' + document.querySelector('.target input:checked + .target-text').innerText;
     message.dataset.target = document.querySelector('.target input:checked').value;
 }
@@ -75,7 +77,7 @@ updateTarget();
 // Page title - first line of the message
 function updatedValue() {
     // Note: [^] is equivalent to "." with the "s" (dotall) flag, but works in Firefox
-    document.title = message.value.trim().replace(/[\r\n][^]*$/, '').trim() || 'Collector';
+    //document.title = message.value.trim().replace(/[\r\n][^]*$/, '').trim() || 'Collector';
 
     if (message.value) {
         message.classList.remove('placeholder');
