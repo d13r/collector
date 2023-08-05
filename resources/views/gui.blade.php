@@ -1,4 +1,3 @@
-<?php require dirname(__DIR__) . '/inc/bootstrap.php' ?>
 <!doctype html>
 <html lang="en-GB">
     <head>
@@ -6,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Collector</title>
 
@@ -72,7 +72,7 @@
 
             <!-- Login -->
             <div class="login-container">
-                <form class="login" action="/login.php" method="post">
+                <form class="login" action="/login" method="post">
                     <div class="login-field">
                         <input name="username" type="text" placeholder="Username" autofocus>
                     </div>
@@ -82,6 +82,7 @@
                     <div class="login-button">
                         <button type="submit">Log In</button>
                     </div>
+                    @csrf
                 </form>
             </div>
 

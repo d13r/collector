@@ -2,7 +2,7 @@
 
 function current_target(): string
 {
-    global $config;
+    $config = config('collector');
 
     $current = $_GET['target'] ?? $_COOKIE['target'] ?? null;
 

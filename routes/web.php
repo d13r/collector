@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\GuiController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SendController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', GuiController::class);
+Route::post('login', LoginController::class);
+Route::post('send', SendController::class);

@@ -3,6 +3,7 @@ const form = document.querySelector('.form');
 const message = document.querySelector('.message');
 const submit = document.querySelector('.submit');
 const targets = document.querySelector('.targets');
+const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
 // Keyboard shortcuts
 message.addEventListener('keydown', function (event) {
@@ -148,9 +149,12 @@ function send() {
     submit.disabled = true;
     submit.innerText = 'Sending...';
 
-    fetch('/send.php', {
+    fetch('/send', {
         body: new FormData(form),
         credentials: 'same-origin',
+        headers: {
+            'X-CSRF-TOKEN': csrfToken,
+        },
         method: 'POST',
     })
         .then(response => response.json())

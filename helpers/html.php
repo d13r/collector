@@ -10,8 +10,3 @@ function checked($value, $expected = null): string
 
     return $checked ? 'checked' : '';
 }
-
-function e($text): string
-{
-    return htmlspecialchars($text, ENT_QUOTES | ENT_HTML5);
-}

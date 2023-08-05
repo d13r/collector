@@ -1,6 +1,0 @@
-/.env
-/.idea/
-/config.php
-/vendor/
-
-!.gitkeep

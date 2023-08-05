@@ -2,7 +2,7 @@
 
 function logged_in()
 {
-    global $config;
+    $config = config('collector');
 
     if (!isset($_COOKIE['auth'])) {
         return false;
