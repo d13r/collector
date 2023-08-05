@@ -67,10 +67,12 @@ function rotateTarget(offset) {
 }
 
 function updateTarget() {
-    document.title = 'To: Me @ ' + document.querySelector('.target input:checked + .target-text').innerText;
+    let target = document.querySelector('.target input:checked');
 
-    message.placeholder = 'To: Me @ ' + document.querySelector('.target input:checked + .target-text').innerText;
-    message.dataset.target = document.querySelector('.target input:checked').value;
+    document.title = `To: ${target.dataset.to.replace(/"/g, '')}`;
+
+    message.placeholder = `To: ${target.dataset.to.replace(/"/g, '')}`;
+    message.dataset.target = target.value;
 }
 
 updateTarget();

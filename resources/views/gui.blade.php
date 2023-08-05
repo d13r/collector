@@ -42,6 +42,7 @@
                             <?php foreach ($config['targets'] as $id => $target): ?>
                                 <label class="target">
                                     <input
+                                        data-to="{{ implode(', ', $target['to']) }}"
                                         type="radio"
                                         name="target"
                                         value="<?= e($id) ?>"
