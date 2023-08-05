@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+RESET=$'\e[0m'
+BOLD=$'\e[1m'
+LRED=$'\e[91m'
+LCYAN=$'\e[96m'
+
+github_repo='git@github.com:d13r/collector.git'
+
+live_server='seven.djm.me'
+live_user='dave'
+live_path='/local/collector'
+
+# Check everything has been committed
+if [[ -n $(git status --porcelain) ]]; then
+    echo "${LRED}Error: There are uncommitted local changes${RESET}" >&2
+    exit 1
+fi
+
+# Push the changes to GitHub
+echo "${LCYAN}${BOLD}Pushing local changes to GitHub...${RESET}"
+git remote set-url origin "$github_repo" 2>/dev/null ||
+    git remote add origin "$github_repo"
+git push origin HEAD
+echo
+
+# Push the changes to the live server
+echo "${LCYAN}${BOLD}Pushing local changes to ${live_server}...${RESET}"
+git push "$live_user@$live_server:$live_path" HEAD
