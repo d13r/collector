@@ -15,9 +15,13 @@ return [
             'title' => 'Home',
             'shortcut' => 'h',
             'return' => 'your@email.com',
-            'from' => '"Your name" <your@email.com>',
-            'replyto' => ['"Your name" <your@email.com>'],
-            'to' => ['"Your name" <your@email.com>'],
+            'from' => ['your@email.com', 'Your name'],
+            'replyto' => [
+                ['your@email.com', 'Your name'],
+            ],
+            'to' => [
+                ['your@email.com', 'Your name'],
+            ],
             'color' => '#00f',
         ],
 
@@ -25,9 +29,13 @@ return [
             'title' => 'Work',
             'shortcut' => 'w',
             'return' => 'your@email.com',
-            'from' => '"Your name" <your@email.com>',
-            'replyto' => ['"Your name" <your@work.com>'],
-            'to' => ['"Your name" <your@work.com>'],
+            'from' => ['your@email.com', 'Your name'],
+            'replyto' => [
+                ['Your name', 'your@work.com'],
+            ],
+            'to' => [
+                ['Your name', 'your@work.com'],
+            ],
             'color' => '#080',
         ],
 
@@ -35,9 +43,15 @@ return [
             'title' => 'Both',
             'shortcut' => 'b',
             'return' => 'your@email.com',
-            'from' => '"Your name" <your@email.com>',
-            'replyto' => ['"Your name" <your@email.com>', '"Your name" <your@work.com>'],
-            'to' => ['"Your name" <your@email.com>', '"Your name" <your@work.com>'],
+            'from' => ['your@email.com', 'Your name'],
+            'replyto' => [
+                ['your@email.com', 'Your name'],
+                ['Your name', 'your@work.com'],
+            ],
+            'to' => [
+                ['your@email.com', 'Your name'],
+                ['Your name', 'your@work.com'],
+            ],
             'color' => '#c00',
         ],
 
