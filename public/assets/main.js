@@ -67,11 +67,14 @@ function rotateTarget(offset) {
 }
 
 function updateTarget() {
-    let target = document.querySelector('.target input:checked');
+    const target = document.querySelector('.target input:checked');
 
-    document.title = `To: ${target.dataset.to.replace(/"/g, '')}`;
+    const emails = JSON.parse(target.dataset.to)
+        .map(([email, name]) => name ? `${name} <${email}>` : email)
+        .join(', ');
 
-    message.placeholder = `To: ${target.dataset.to.replace(/"/g, '')}`;
+    document.title = `To: ${emails}`;
+    message.placeholder = `To: ${emails}`;
     message.dataset.target = target.value;
 }
 
@@ -151,7 +154,7 @@ function send() {
     submit.disabled = true;
     submit.innerText = 'Sending...';
 
-    fetch('/send', {
+    fetch(form.action, {
         body: new FormData(form),
         credentials: 'same-origin',
         headers: {
@@ -163,13 +166,18 @@ function send() {
         .then(json => {
             if (json.error) {
                 alert(json.error);
-            } else if (json.success) {
+            } else if (json.success || json.refresh) {
                 localStorage.setItem('last-message', text);
                 confirmation.innerText = json.success;
                 confirmation.classList.remove('show');
-                setTimeout(() => confirmation.classList.add('show'), 0);
                 message.value = '';
                 updatedValue();
+                if (json.refresh) {
+                    // location.reload() wasn't working for some reason
+                    setTimeout(() => window.location = '/', 0);
+                } else {
+                    setTimeout(() => confirmation.classList.add('show'), 0);
+                }
             } else {
                 alert('Received an invalid response from the server');
             }

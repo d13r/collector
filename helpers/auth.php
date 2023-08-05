@@ -1,14 +1,9 @@
 <?php
 
-function logged_in()
+function logged_in(): bool
 {
-    $config = config('collector');
+    $cookie = Cookie::get('auth', '');
+    $expected = config('collector.username') . "\n" . config('collector.password-hash');
 
-    if (!isset($_COOKIE['auth'])) {
-        return false;
-    }
-
-    $auth = explode("\n", $_COOKIE['auth']);
-
-    return $auth[0] === $config['username'] && hash_equals($config['password-hash'], $auth[1]);
+    return hash_equals($expected, $cookie);
 }

@@ -1,10 +1,8 @@
 <?php
 
-function asset_url($file)
+function asset_url($file): string
 {
-    $path = base_path("public/assets/$file");
+    $hash = md5_file(base_path("public/assets/$file"));
 
-    $hash = md5_file($path);
-
-    return "/assets/$hash/$file";
+    return asset("assets/$hash/$file");
 }

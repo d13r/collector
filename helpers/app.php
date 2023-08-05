@@ -2,19 +2,17 @@
 
 function current_target(): string
 {
-    $config = config('collector');
+    $targets = config('collector.targets');
+    $current = request('target') ?? Cookie::get('target');
 
-    $current = $_GET['target'] ?? $_COOKIE['target'] ?? null;
-
-    if (!isset($config['targets'][$current])) {
-        reset($config['targets']);
-        $current = key($config['targets']);
+    if (!isset($targets[$current])) {
+        $current = array_key_first($targets);
     }
 
     return $current;
 }
 
-function is_current_target($target): bool
+function is_current_target(string $target): bool
 {
     return $target === current_target();
 }

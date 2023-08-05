@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use Cookie;
+use Session;
+
 class LoginController extends Controller
 {
     public function __invoke()
     {
-        $config = config('collector');
+        $username = request('username');
+        $password = request('password');
+        $hash = config('collector.password-hash');
 
-        $username = $_POST['username'] ?? '';
-        $password = $_POST['password'] ?? '';
-
-        if ($username === $config['username'] && password_verify($password, $config['password-hash'])) {
-            $value = "$username\n{$config['password-hash']}";
+        if ($username && $password && $username === config('collector.username') && password_verify($password, $hash)) {
+            $value = "$username\n$hash";
         } else {
             $value = 'invalid';
         }
 
-        send_forever_cookie('auth', $value);
+        Session::regenerate(true);
+        Cookie::queue(Cookie::forever('auth', $value));
+
         return redirect('/');
     }
 }
