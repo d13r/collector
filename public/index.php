@@ -42,12 +42,13 @@
                             <?php foreach ($config['targets'] as $id => $target): ?>
                                 <label class="target">
                                     <input
-                                        type="radio"
-                                        name="target"
-                                        value="<?= e($id) ?>"
                                         accesskey="<?= e($target['shortcut']) ?>"
-                                        tabindex="-1"
                                         <?= checked(is_current_target($id)) ?>
+                                        data-to="<?= e(implode(', ', $target['to'])) ?>"
+                                        name="target"
+                                        tabindex="-1"
+                                        type="radio"
+                                        value="<?= e($id) ?>"
                                     >
                                     <span class="target-text"><?= e($target['title']) ?></span>
                                 </label>
